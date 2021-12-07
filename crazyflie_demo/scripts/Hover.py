@@ -118,18 +118,18 @@ class Crazyflie:
 
     # take off to z distance
     def takeOff(self, zDistance):
-        time_range = 1 + int(10*zDistance/0.4)
+        time_range = 1 + int(50*zDistance)
         while not rospy.is_shutdown():
             for y in range(time_range):
                 self.msg.vx = 0.0
                 self.msg.vy = 0.0
                 self.msg.yawrate = 0.0
-                self.msg.zDistance = y / 25.0
+                self.msg.zDistance = y / 50.0
                 self.msg.header.seq += 1
                 self.msg.header.stamp = rospy.Time.now()
                 self.pub.publish(self.msg)
                 self.rate.sleep()
-            for y in range(20):
+            for y in range(200):
                 self.msg.vx = 0.0
                 self.msg.vy = 0.0
                 self.msg.yawrate = 0.0
@@ -160,19 +160,19 @@ class Crazyflie:
 
 def handler(cf):
     cf.takeOff(0.4)
-    cf.goTo(0.4, 0.1, 0.2, 0)
+    # cf.goTo(0.4, 0.1, 0.2, 0)
     cf.land()
 
 if __name__ == '__main__':
     rospy.init_node('hover', anonymous=True)
 
     cf1 = Crazyflie("cf1")
-    cf2 = Crazyflie("cf2")
+    #cf2 = Crazyflie("cf2")
 
     t1 = Thread(target=handler, args=(cf1,))
-    t2 = Thread(target=handler, args=(cf2,))
+    #t2 = Thread(target=handler, args=(cf2,))
     t1.start()
-    t2.start()
+    #t2.start()
 
 
 
