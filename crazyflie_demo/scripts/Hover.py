@@ -134,13 +134,15 @@ class Crazyflie:
 
     # take off to z distance
     def takeOff(self, zDistance):
-        time_range = 1 + int(50*zDistance)
+        time_range = 1 + int(100*zDistance)
         while not rospy.is_shutdown():
+            for y in range(50):
+                self.rate.sleep()
             for y in range(time_range):
                 self.msg.vx = 0.0
                 self.msg.vy = 0.0
                 self.msg.yawrate = 0.0
-                self.msg.zDistance = y / 50.0
+                self.msg.zDistance = y / 100.0
                 self.msg.header.seq += 1
                 self.msg.header.stamp = rospy.Time.now()
                 self.hover_cmd_pub.publish(self.msg)
