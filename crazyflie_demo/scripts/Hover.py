@@ -250,11 +250,11 @@ class Crazyflie:
 def handler(cf):
     duration = 10
     radius = 0.15
-    cf.gen_traj_circle(radius, duration)
+    # cf.gen_traj_circle(radius, duration)
 
-    # cf.takeOff(cf.hover_z)
+    cf.takeOff(cf.hover_z)
     # cf.follow_traj(duration)
-    cf.goTo(0.4, 0.0, 0.0, 0)
+    # cf.goTo(0.4, 0.0, 0.0, 0)
     cf.land()
 
 

@@ -24,4 +24,7 @@
   </group>
     <node name="crazyflie_demo_hover" pkg="crazyflie_demo" type="Hover.py" output="screen">
     </node>
+    <node name="record" pkg="rosbag" type="record" args="record -a "> 
+    </node>
+
 </launch>
